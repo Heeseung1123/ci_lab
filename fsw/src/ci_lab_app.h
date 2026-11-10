@@ -43,7 +43,7 @@
 /****************************************************************************/
 
 #define CI_LAB_BASE_UDP_PORT 1234
-#define CI_LAB_MAX_INGEST    768
+#define CI_LAB_MAX_INGEST    1024 /* Largest TC Transfer Frame */
 #define CI_LAB_PIPE_DEPTH    32
 
 /************************************************************************

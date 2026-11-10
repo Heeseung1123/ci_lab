@@ -35,6 +35,7 @@
 #include "ci_lab_msg.h"
 #include "ci_lab_events.h"
 #include "ci_lab_version.h"
+#include "tc_sdlp_my.h"
 
 /*
 ** CI global data...
@@ -262,6 +263,10 @@ void CI_LAB_ProcessGroundCommand(CFE_SB_Buffer_t *SBBufPtr)
             }
             break;
 
+/*ase CI_LAB_NEW_PQC_SESSION:
+	    PQC_session_function();
+	    break;*/
+
         /* default case already found during FC vs length test */
         default:
             break;
@@ -368,6 +373,18 @@ void CI_LAB_ReadUpLink(void)
 
         status = OS_SocketRecvFrom(CI_LAB_Global.SocketID, CI_LAB_Global.NextIngestBufPtr, CI_LAB_MAX_INGEST,
                                    &CI_LAB_Global.SocketAddress, OS_CHECK);
+
+        // Strip the TC frame so only the Space Packet stays at the buffer start.
+        if (status > 0)
+        {
+            status = TC_SDLP_myExtractPacket(CI_LAB_Global.NextIngestBufPtr, status);
+            if (status < 0)
+            {
+                CI_LAB_Global.HkTlm.Payload.IngestErrors++;
+                continue;
+            }
+        }
+
         if (status >= (int32)sizeof(CFE_MSG_CommandHeader_t) && status <= ((int32)CI_LAB_MAX_INGEST))
         {
             CFE_ES_PerfLogEntry(CI_LAB_SOCKET_RCV_PERF_ID);

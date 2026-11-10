@@ -1,0 +1,19 @@
+38d37
+< #include "tc_sdlp_my.h"
+385,397c384,385
+< 	examplePQC_decrypt(CI_LAB_Global.NextIngestBufPtr, SA_Header);
+< 	*/
+< 
+<         // Strip the TC frame so only the Space Packet stays at the buffer start.
+<         if (status > 0)
+<         {
+<             status = TC_SDLP_myExtractPacket(CI_LAB_Global.NextIngestBufPtr, status);
+<             if (status < 0)
+<             {
+<                 CI_LAB_Global.HkTlm.Payload.IngestErrors++;
+<                 continue;
+<             }
+<         }
+---
+> 	examplePQC_decrypt(CI_LAB_Global.NextIngestBufPtr, SA_Header); 
+> 	*/ 

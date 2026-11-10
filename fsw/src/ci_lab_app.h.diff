@@ -1,0 +1,4 @@
+46c46
+< #define CI_LAB_MAX_INGEST    1024 /* Largest TC Transfer Frame */
+---
+> #define CI_LAB_MAX_INGEST    768

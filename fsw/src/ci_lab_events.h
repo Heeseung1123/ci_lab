@@ -40,6 +40,7 @@
 #define CI_LAB_INGEST_LEN_ERR_EID   8
 #define CI_LAB_INGEST_ALLOC_ERR_EID 9
 #define CI_LAB_INGEST_SEND_ERR_EID  10
+#define CI_LAB_TCFRAME_ERR_EID      11
 #define CI_LAB_LEN_ERR_EID          16
 
 #endif /* _ci_lab_events_h_ */
