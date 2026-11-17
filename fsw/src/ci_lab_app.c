@@ -36,6 +36,7 @@
 #include "ci_lab_events.h"
 #include "ci_lab_version.h"
 #include "tc_sdlp_my.h"
+#include "pqc_sdls_my.h"
 
 /*
 ** CI global data...
@@ -104,7 +105,8 @@ void CI_Lab_AppMain(void)
         CFE_ES_PerfLogExit(CI_LAB_MAIN_TASK_PERF_ID);
 
         /* Pend on receipt of command packet -- timeout set to 500 millisecs */
-        status = CFE_SB_ReceiveBuffer(&SBBufPtr, CI_LAB_Global.CommandPipe, 500);
+        // status = CFE_SB_ReceiveBuffer(&SBBufPtr, CI_LAB_Global.CommandPipe, 500);
+        status = CFE_SB_ReceiveBuffer(&SBBufPtr, CI_LAB_Global.CommandPipe, CI_LAB_UPLINK_POLL_MSEC);
 
         CFE_ES_PerfLogEntry(CI_LAB_MAIN_TASK_PERF_ID);
 
@@ -181,6 +183,7 @@ void CI_LAB_TaskInit(void)
     }
 
     CI_LAB_ResetCounters_Internal();
+//    PQC_SDLS_myInit();
 
     /*
     ** Install the delete handler
@@ -384,6 +387,18 @@ void CI_LAB_ReadUpLink(void)
                 continue;
             }
         }
+
+        /* SDLS EP packets are found by the Space Packet header and handled first.
+         * They never reach the Software Bus, so the ingest buffer is reused. 
+        if ((status > 0) && PQC_SDLS_myIsEpPacket(CI_LAB_Global.NextIngestBufPtr->Msg.Byte, status))
+        {
+            if (PQC_SDLS_myProcessEp(CI_LAB_Global.NextIngestBufPtr->Msg.Byte, status) < 0)
+            {
+                CI_LAB_Global.HkTlm.Payload.IngestErrors++;
+            }
+            continue;
+        }
+	*/ 
 
         if (status >= (int32)sizeof(CFE_MSG_CommandHeader_t) && status <= ((int32)CI_LAB_MAX_INGEST))
         {

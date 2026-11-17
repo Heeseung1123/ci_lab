@@ -34,6 +34,9 @@
 
 #define CI_LAB_HK_TLM_MID 0x0884
 
+/* PQC SDLS EP replies (HS_REQ_R, HS_KEX_R, Ping reply) for the downlink. */
+#define CI_LAB_PQC_EP_TLM_MID 0x0980
+
 #endif /* _ci_lab_msgids_h_ */
 
 /************************/

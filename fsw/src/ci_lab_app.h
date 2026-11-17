@@ -46,6 +46,10 @@
 #define CI_LAB_MAX_INGEST    1024 /* Largest TC Transfer Frame */
 #define CI_LAB_PIPE_DEPTH    32
 
+/* The UDP socket is read after every command or this timeout, so it bounds the uplink delay.
+ * Was a literal 500 ms in ci_lab_app.c; at most 11 TC frames are read per wakeup. */
+#define CI_LAB_UPLINK_POLL_MSEC 100
+
 /************************************************************************
 ** Type Definitions
 *************************************************************************/

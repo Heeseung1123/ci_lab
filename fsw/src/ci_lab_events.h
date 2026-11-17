@@ -41,6 +41,8 @@
 #define CI_LAB_INGEST_ALLOC_ERR_EID 9
 #define CI_LAB_INGEST_SEND_ERR_EID  10
 #define CI_LAB_TCFRAME_ERR_EID      11
+#define CI_LAB_PQC_EP_INF_EID       12
+#define CI_LAB_PQC_EP_ERR_EID       13
 #define CI_LAB_LEN_ERR_EID          16
 
 #endif /* _ci_lab_events_h_ */
