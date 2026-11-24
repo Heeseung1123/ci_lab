@@ -20,7 +20,7 @@
 #define TC_SDLP_MY_DUMMY_VCID 0
 
 /* SDLS TC baseline: SPI 2 + Sequence Number 4 bytes, and a 16 byte MAC.
- * The fields stay reserved and are skipped while SDLS is disabled. */
+ * Both are 0 bytes, not reserved, while SDLS is disabled. */
 #define TC_SDLP_MY_SDLS_HDR_LENGTH 0
 #define TC_SDLP_MY_SDLS_TRL_LENGTH 0
 
